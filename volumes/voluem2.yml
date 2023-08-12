@@ -1,0 +1,20 @@
+# Volumes : hostPath
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","sleep 10000"]
+      volumeMounts:
+      - name: sktech-vol
+        mountPath: /tmp/containerpath
+  volumes:
+  - name: sktech-vol
+    hostPath:
+      path: /tmp/data
+
+# login into Pod and create a file under /tmp/containerpath
+# Verify from the hostpath under /tmp/data 

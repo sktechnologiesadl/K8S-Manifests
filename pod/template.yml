@@ -1,0 +1,26 @@
+############### High level syntax
+apiVersion:
+kind:
+metadata:
+spec:
+
+template of the manifest file 
+
+apiVersion: [va | apps/v1]
+kind: [Pod | ReplicationController | ReplicaSet | Deployment | Service | ]
+metadata:
+  name: <value>
+  label: <value>
+spec:
+  containers:
+    name:
+    image:
+    command:
+    workingDir:
+    ports:
+    env:
+    resources:
+    volumeMounts:
+    livenessProbe:
+    readinelss:
+    

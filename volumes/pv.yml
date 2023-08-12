@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sktech-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  awsElasticBlockStore:
+    volumeID: ***********
+    faType: ext4
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: sktech-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sktech-rc
+spec:
+  replicas: 2
+  selector:
+    matchExpression:
+    - app: frontend
+  template:
+    metadata:
+      name: sktech-pod
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name:  sktech-con
+        image: httpd:2.4.57
+        volumeMounts:
+        - name: sktech-volume
+          mountPath: /tmp/persistent
+      volumes:
+      - name: sktech-volume
+        persistentVolumeClaim:
+          claimName: sktech-pvc

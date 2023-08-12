@@ -1,0 +1,25 @@
+# Volumes : emptyDir 
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","sleep 10000"]
+      volumeMounts:
+      - name: sktech-vol
+        mountPath: /tmp/xchange
+  - name: sktech-con-2
+    image: ubuntu:18.04
+    command: ["bin/bash","-c","sleep 10000"]
+    volumeMounts:
+    - name: sktech-vol
+      mountPath: /tmp/data
+  volumes:
+  - name: sktech-vol
+    emptyDir: {}
+
+# login into Pod and create a file under /tmp/xchange 
+# Go and login into another Pod and validate 

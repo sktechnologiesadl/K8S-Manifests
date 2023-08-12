@@ -1,0 +1,17 @@
+Example-06 --- Multi containers - 1:Ubuntu 2:Httpd 
+########### 2 containers within single pod 
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+  - name: sktech-con-2
+    image: http:2.4.57
+    ports:
+    - containerPort: 80
+  restartPolicy: Never

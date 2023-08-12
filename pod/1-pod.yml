@@ -1,0 +1,139 @@
+Example-01 --- Basic-Pod
+apiVersion: v1                  # API version
+kind: Pod                       # Type of the Object 
+metadata:                       # Object Information / Details 
+  name: sktech-pod              # Name of the Object             
+spec:                           # Specifications of the Object
+  containers:
+  - name: sktech-con
+    image: ubuntu:22.04
+  restartPolicy: Never          # defualt = Always , OnFailure 
+  
+
+  Example-02 --- Loop command added 
+  ---
+  To overcome above issue you can add some looping command
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+  restartPolicy: Never     
+
+Example-03 --- Multi Containers in single Pod
+---
+Create 2 Containers in a single Pod 
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+  - name: sktech-con-2
+    image: ubuntu:18.04
+    command: ["bin/bash","-c","while true;do echo Hello Students;sleep 3;done"]
+  restartPolicy: Never
+
+Example-04 --- Annotations 
+######## Annotations = Description about the Object
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod
+  annotations:
+    description: This is the pod where we are in the Dev Environment by SKTech                       
+spec:                          
+  containers:
+  - name: sktech-con
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+  restartPolicy: Never
+
+Example-05 --- Environment Variables 
+########### Defining the Environment Variables 
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod
+  annotations:
+    description: This is the pod where we are in the Dev Environment by SKTech                       
+spec:                          
+  containers:
+  - name: sktech-con
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+    env:
+    - name: MYNAME
+      value: SKTech
+  restartPolicy: Never
+
+
+Example-05 --- Port Exposing  
+########### Port definition  
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod
+  annotations:
+    description: This is the pod where we are in the Dev Environment by SKTech                       
+spec:                          
+  containers:
+  - name: sktech-con
+    image: httpd
+    ports:
+    - containerPort: 80
+  restartPolicy: Never
+
+
+Example-06 --- Labels & Selectors 
+########### Labels & Selectors 
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod
+  annotations:
+    description: This is the pod where we are in the Dev Environment by SKTech
+  labels:
+    env: development
+    app: frontend
+    class: pods                     
+spec:                          
+  containers:
+  - name: sktech-con
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+    env:
+    - name: MYNAME
+      value: SKTech
+  restartPolicy: Never 
+
+
+
+Example-06 --- Multi containers - 1:Ubuntu 2:Httpd 
+########### Labels & Selectors 
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: ubuntu:22.04
+    command: ["bin/bash","-c","while true;do echo Hello SKTech;sleep 3;done"]
+  - name: sktech-con-2
+    image: http:2.4.57
+    ports:
+    - containerPort: 80
+  restartPolicy: Never

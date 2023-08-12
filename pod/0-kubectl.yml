@@ -1,0 +1,27 @@
+Kubectl commands
+----------------
+# kubectl get nodes
+# kubectl apply -f pod.yml      # kubectl delete -f pod.yml
+# kubectl get po 
+# kubectl get po -o wide 
+# kubectl describe po <Podname>
+# kubect logs -f <Podname>
+# kubectl logs -f Podname -c ContainerName
+# kubectl exec -it Podname /bin/bash
+# kubectl exec Podname -c ContainerName -- command
+    kubectl exec sktech-pod -c sktech-con1 -- hostname
+    kubectl exec sktech-pod -c sktech-con1 -- cat /etc/os-release 
+        kubectl exec sktech-pod -c sktech-con2 -- cat /etc/os-release
+# kubectl exec -it Podname -c ContainerName /bin/bash
+# kubectl delete po Podname 
+# kubectl delete -f Pod.yml 
+
+------------
+# kubectl get pods --show-labels
+
+# kubectl get po -l env=development 
+
+------------
+# kubectl scale --replicas=2 rc/sktech-rc
+# kubectl scale --replicas=4 rs/sktech-rs
+

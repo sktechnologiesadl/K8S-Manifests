@@ -1,0 +1,27 @@
+Example-07 --- Two Pods one is httpd another one is NGINX
+###########  one pod = httpd 2nd pod = nginx 
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: httpd:2.4.57
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod                          
+spec:                          
+  containers:
+  - name: sktech-con-1
+    image: nginx:1.25.1
+    ports:
+    - containerPort: 80
+
+-------------------------------------------------------
+try to access both HTTPD & NGINX with their respective Pod IPs

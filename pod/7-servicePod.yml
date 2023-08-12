@@ -1,0 +1,29 @@
+# Service : ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sktech-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: frontend
+  ports:
+  - port: 80              # Container Port 
+    targetPort: 80        # Pod Port
+  
+# Note: you can apply this Service on top of Pod / Deployment based on your labels
+---
+apiVersion: v1                 
+kind: Pod                       
+metadata:                        
+  name: sktech-pod
+  labels:
+    app: frontend                     
+spec:                          
+  containers:
+  - name: sktech-con
+    image: httpd
+    ports:
+    - containerPort: 80
+  restartPolicy: Never
